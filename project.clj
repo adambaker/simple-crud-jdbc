@@ -1,5 +1,5 @@
-(defproject simple-crud-jdbc "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
+(defproject simple-crud-jdbc "0.1.0"
+  :description "Generate simple CRUD fns for any sql table"
   :url "https://github.com/adambaker/simple-crud-jdbc"
   :license {:name "Unlicense"
             :url "http://unlicense.org/"}
