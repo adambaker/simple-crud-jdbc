@@ -3,11 +3,6 @@
             [clojure.java.jdbc :as jdbc])
   (:import [clojure.lang IPersistentMap IPersistentVector]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
-
 (defn- add-where-item [where-vec [k v]] (conj where-vec [:= k v]))
 (defn where-map [where]
   (cond
