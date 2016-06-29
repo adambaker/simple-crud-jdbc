@@ -60,4 +60,38 @@
            nil) "can still specify a connection to override default")
     ))
 
+(deftest default-conn-update!
+  (let [orange (default-conn/create!
+                 {:name "orange", :appearance "orange", :cost 120})
+        pear (default-conn/create! {:name "pear" :appearance "pear shaped"})
+        grape (default-conn/create! {:name "grape"})]
+    (is (= (default-conn/update! {:appearance "more of a yellowish-orange"}
+                                 {:id (orange :id)})
+           1))
+    (is (= (default-conn/read-one {:name "orange"})
+           (assoc orange :appearance "more of a yellowish-orange")))
+    (is (= (default-conn/update! {:cost 100} {:cost nil})
+           2))
+    (is (= (set (default-conn/read-all true))
+           #{(assoc orange :appearance "more of a yellowish-orange")
+             (assoc pear :cost 100)
+             (assoc grape :cost 100)}))
+    (is (= (default-conn/update! {:appearance nil} [:<> :appearance nil])
+           2))
+    (is (= (set (default-conn/read-all true))
+           #{(assoc orange :appearance nil)
+             (assoc pear :cost 100 :appearance nil)
+             (assoc grape :cost 100)}))
+    ))
 
+(deftest default-conn-delete!
+  (let [orange (default-conn/create!
+                 {:name "orange", :appearance "orange", :cost 120})
+        pear (default-conn/create! {:name "pear" :appearance "pear shaped"})
+        grape (default-conn/create! {:name "grape"})]
+    (is (= (default-conn/delete! {:cost nil})
+           2))
+    (is (= (default-conn/read-all true) [orange]))
+    (is (= (default-conn/delete! {:id (orange :id)})
+           1))
+    (is (= (default-conn/read-all true) []))))
