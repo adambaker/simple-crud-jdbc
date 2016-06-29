@@ -1,4 +1,4 @@
-(defproject simple-crud-jdbc "0.1.0"
+(defproject simple-crud-jdbc "0.2.0"
   :description "Generate simple CRUD fns for any sql table"
   :url "https://github.com/adambaker/simple-crud-jdbc"
   :license {:name "Unlicense"
